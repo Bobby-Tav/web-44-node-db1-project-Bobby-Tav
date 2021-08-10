@@ -1,13 +1,20 @@
+const db = require('./../../data/db-config')
+
 const getAll = () => {
   // DO YOUR MAGIC
+  return db('accounts')
 }
 
 const getById = id => {
   // DO YOUR MAGIC
+  return db('accounts').where({id: id}).first()
 }
 
-const create = account => {
+const create = async account => {
   // DO YOUR MAGIC
+  const [id] = await db('accounts').insert( account )
+  const newAccount = await getById(id)
+  return newAccount
 }
 
 const updateById = (id, account) => {
